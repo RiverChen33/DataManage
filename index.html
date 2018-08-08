@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery后台左侧伸缩菜单代码 - 站长素材</title>
+
+<link rel="stylesheet" type="text/css" href="css/nav.css">
+<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/nav.js"></script>
+<style>
+	.header{
+		height:60px;
+		border-bottom:1px solid rgba(255,255,255,.1);
+		width:100%;
+		background-color: #263238;
+		position:fixed;
+		z-index: 100
+	}
+
+	.logo{
+		height:60px;
+		position:absolute;
+		top:0;
+		left:15px;
+	}
+	.right{
+		position:absolute;
+		right:0;
+		color:#c9c9c9;
+		font-size:16px;
+	}
+	.headImg{
+		width:40px;height:40px;
+		border-radius: 100%;
+		display: inline-block;
+		position: absolute;
+margin-top: 10px
+	}
+	.rightSection{
+		display: block;
+		float:left;height:60px;
+		line-height: 60px;
+	}
+	.border40+.border40{
+		padding-left:20px;
+		margin-left:20px;
+		position:relative
+	}
+	.border40+.border40:after{
+		content: '';
+		height:40px;
+		width:0;
+		border-left:1px solid #c9c9c9;
+		position:absolute;
+		top:50%;
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		left:0
+	}
+
+	.setting-wrap {
+		padding: 30px 40px
+	}
+
+	.setting-inner {
+		margin-right: -40px
+	}
+
+	.setting-inner .setting-item {
+		margin-right: 40px;
+		margin-bottom: 40px;
+		padding: 10px 15px;
+		width: 213px;
+		height: 140px;
+		border-radius: 4px;
+		border: 1px solid #e1e1e1;
+		text-align: center;
+		cursor: pointer;
+		display: inline-block;
+	}
+
+	.setting-inner .setting-item:hover {
+		border: 1px solid #19d2a0
+	}
+	.setting-inner .setting-item.productTypeDiv-bg {
+		background: url('images/productTypeDiv-bg.png') center 22px no-repeat #FFF;
+	}
+	.setting-inner .setting-item .title {
+		font-size: 18px;
+		color: #363636;
+	}
+	.setting-inner .setting-item .text {
+		margin-top: 80px;
+	}
+	.my-title{
+		height: 60px;line-height: 60px;font-size: 20px;padding-left: 40px;text-align: left;font-weight: 500;background-color: white;margin-right:10px;border-bottom:1px solid #c7c7c7;
+		position: relative;
+		width:100%;
+		box-sizing: border-box;
+	}
+
+	.my-title:after{
+		content: '';
+		position:absolute;
+		border-left:8px solid #19d2a0;
+		height:20px;
+		left:0;top:50%;
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+	}
+</style>
+</head>
+<body>
+<div class="header">
+	<img src="images/logo.png" class="logo">
+	<div class="right">
+		<span class="rightSection border40">
+			<span style="display: inline-block;margin-right: 5px;">金华市智业投资有限公司</span>
+			<span>金磐网络科技园</span>
+			<span>》</span>
+		</span>
+		<span class="rightSection border40">
+			<img src="images/timg.jpg" class="headImg">
+			<span style="display: inline-block;margin-left:50px;width: 70px;/* padding: 6px 0 */height: 60px;position: relative;">
+				<span style="font-size:18px;color:#c9c9c9;display: inline-block;width:60px;position:absolute;top:-8px;left:0px;">张三</span>
+				<span style="font-size:14px;color:#c9c9c9;display: inline-block;width:60px;position:absolute;top:13px;left:0px;">退出</span>
+			</span>
+		</span>
+		<span  class="rightSection border40" >
+			问题中心
+		</span>
+		<span  class="rightSection" style="padding:0 10px;">
+			问题中心
+		</span>
+	</div>
+</div>
+<div style="position:relative;">
+<div class="nav nav-mini" style="position:fixed;top:60px;bottom:0;z-index: 100">
+	<div class="nav-top">
+		<div id="mini" style="border-bottom:1px solid rgba(255,255,255,.1)"><img src="images/mini.png" ></div>
+	</div>
+	<ul>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>网站配置</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>网站设置</span></a></li>
+				<li><a href="javascript:;"><span>友情链接</span></a></li>
+				<li><a href="javascript:;"><span>分类管理</span></a></li>
+				<li><a href="javascript:;"><span>系统日志</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>文章管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>站内新闻</span></a></li>
+				<li><a href="javascript:;"><span>站内公告</span></a></li>
+				<li><a href="javascript:;"><span>登录日志</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_3"></i><span>订单管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>订单列表</span></a></li>
+				<li><a href="javascript:;"><span>打个酱油</span></a></li>
+				<li><a href="javascript:;"><span>也打酱油</span></a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+	<div id="main" style="margin-left: 60px;">
+		<div class="setting-wrap" style="padding-top:90px;min-width: 1200px;display: none">
+			<div>
+				<div class="my-title" style="">常用功能</div>
+				<div id="commonSettingDiv" class="setting-inner clearfix" style="background-color: white;padding: 40px 0;margin-right: 0px;padding-bottom: 0;text-align: center">
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+					<div onclick="toUrl('收费设置', '/menus/toMain/chargeSetIndex',true)" class="setting-item productTypeDiv-bg">
+						<div class="text">
+							<p class="title">收费设置</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="display: flex;flex-direction: row;flex:1;margin-top:30px;">
+				<div style="display: flex;flex:3;flex-direction: column;">
+					<div class="my-title">修改密码</div>
+					<div style="height:200px;background-color: white;width:100%;">
+						<div></div>
+					</div>
+				</div>
+				<div style="display: flex;flex:4;flex-direction: column;padding-left:20px;">
+					<div class="my-title">智能计费</div>
+					<div style="height:200px;background-color: white;width:100%;"></div>
+				</div>
+				<div style="display: flex;flex:5;flex-direction: column;padding-left:20px;">
+					<div class="my-title">广告管理</div>
+					<div style="height:200px;background-color: white;width:100%;"></div>
+				</div>
+			</div>
+		</div>
+		<iframe style="width:100%;min-width:1200px;height:100%;min-height:1000px;background-color: white;padding-top:58px;min-width: 1200px;" src="BaseInfo/RoomInfo.html"></iframe>
+	</div>
+</div>
+<script>
+	$(function(){
+		var token=GetQueryString("token");
+//		if(token!="123"){
+//		    location.href="login.html";
+//		    return;
+//		}
+	})
+
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+</script>
+</body>
+</html>
