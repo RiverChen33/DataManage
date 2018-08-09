@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>jQuery后台左侧伸缩菜单代码 - 站长素材</title>
+<title>后台管理系统</title>
 
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="font/iconfont.css">
@@ -143,28 +143,82 @@ margin-top: 10px
 	</div>
 	<ul>
 		<li class="nav-item">
-			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>网站配置</span><i class="my-icon nav-more"></i></a>
+			<a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>基础设置</span><i class="my-icon nav-more"></i></a>
 			<ul>
-				<li><a href="javascript:;"><span>网站设置</span></a></li>
-				<li><a href="javascript:;"><span>友情链接</span></a></li>
-				<li><a href="javascript:;"><span>分类管理</span></a></li>
-				<li><a href="javascript:;"><span>系统日志</span></a></li>
+				<li><a onclick="Jump('Sections/BaseInfo/ProductType.html')"><span>产品类型</span></a></li>
+				<li><a href="javascript:;"><span>项目组团</span></a></li>
+				<li><a href="javascript:;"><span>楼栋资料</span></a></li>
+				<li><a href="javascript:;"><span>流程设置</span></a></li>
 			</ul>
 		</li>
 		<li class="nav-item">
-			<a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>文章管理</span><i class="my-icon nav-more"></i></a>
+			<a href="javascript:;"><i class="my-icon nav-icon icon_3"></i><span>房间资料</span><i class="my-icon nav-more"></i></a>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_3"></i><span>客户资料</span><i class="my-icon nav-more"></i></a>
 			<ul>
-				<li><a href="javascript:;"><span>站内新闻</span></a></li>
-				<li><a href="javascript:;"><span>站内公告</span></a></li>
-				<li><a href="javascript:;"><span>登录日志</span></a></li>
+				<li><a href="javascript:;"><span>迁入</span></a></li>
+				<li><a href="javascript:;"><span>迁出</span></a></li>
+				<li><a href="javascript:;"><span>客户信息</span></a></li>
 			</ul>
 		</li>
 		<li class="nav-item">
-			<a href="javascript:;"><i class="my-icon nav-icon icon_3"></i><span>订单管理</span><i class="my-icon nav-more"></i></a>
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>社区/园区服务</span><i class="my-icon nav-more"></i></a>
 			<ul>
-				<li><a href="javascript:;"><span>订单列表</span></a></li>
-				<li><a href="javascript:;"><span>打个酱油</span></a></li>
-				<li><a href="javascript:;"><span>也打酱油</span></a></li>
+				<li><a href="javascript:;"><span>访客通行</span></a></li>
+				<li><a href="javascript:;"><span>物品放行</span></a></li>
+				<li><a href="javascript:;"><span>便民电话</span></a></li>
+				<li><a href="javascript:;"><span>通知管理</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>客户服务</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>设置</span></a></li>
+				<li><a href="javascript:;"><span>工单</span></a></li>
+				<li><a href="javascript:;"><span>工单查询</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>设备管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>设置</span></a></li>
+				<li><a href="javascript:;"><span>设备信息</span></a></li>
+				<li><a href="javascript:;"><span>设备维修</span></a></li>
+				<li><a href="javascript:;"><span>设备巡检</span></a></li>
+				<li><a href="javascript:;"><span>设备巡查</span></a></li>
+				<li><a href="javascript:;"><span>维修工单</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>收费管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>收费设置</span></a></li>
+				<li><a href="javascript:;"><span>财务报表</span></a></li>
+				<li><a href="javascript:;"><span>收费</span></a></li>
+				<li><a href="javascript:;"><span>账单</span></a></li>
+				<li><a href="javascript:;"><span>查询</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>车位管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>车位管理</span></a></li>
+				<li><a href="javascript:;"><span>车辆违停记录</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>招商管理/园区管理</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>资源管理</span></a></li>
+				<li><a href="javascript:;"><span>签约管理</span></a></li>
+				<li><a href="javascript:;"><span>合同管理</span></a></li>
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>报表中心</span><i class="my-icon nav-more"></i></a>
+			<ul>
+				<li><a href="javascript:;"><span>经营分析报表</span></a></li>
 			</ul>
 		</li>
 	</ul>
@@ -243,10 +297,14 @@ margin-top: 10px
 				</div>
 			</div>
 		</div>
-		<iframe style="width:100%;min-width:1200px;height:100%;min-height:1000px;background-color: white;padding-top:58px;min-width: 1200px;" src="BaseInfo/RoomInfo.html"></iframe>
+		<iframe style="width:100%;min-width:1200px;height:100%;min-height:1000px;background-color: white;padding-top:58px;min-width: 1200px;" id="MainFrame" src="Sections/BaseInfo/ProductType.html"></iframe>
 	</div>
 </div>
 <script>
+	function Jump(src){
+	    $("#MainFrame").attr("src",src);
+	}
+
 	$(function(){
 		var token=GetQueryString("token");
 //		if(token!="123"){
