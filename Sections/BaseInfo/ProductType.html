@@ -8,6 +8,7 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/style.min.css" rel="stylesheet">
     <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.serializejson.min.js"></script>
 
     <style>
         *{
@@ -30,7 +31,7 @@
 
             <div class="row-fluid">
                 <div class="box span12">
-                    <h3 style="font-size: 25px;padding-bottom: 10px">产品类型</h3>
+                    <h3 style="font-size: 25px;padding-bottom: 10px" id="titleContent">产品类型</h3>
                     <div></div>
                     <div class="box-content">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
@@ -49,7 +50,7 @@
                                         <a class="btn" onclick="Create()">
                                             新增
                                         </a>
-                                        <a class="btn" href="#">
+                                        <a class="btn" href="#" onclick="Delete()">
                                             删除
                                         </a>
                                         <a class="btn" href="#">
@@ -63,13 +64,8 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting"  rowspan="1" colspan="1" style="width: 60px;">
-                                    <input type="checkbox">全选
+                                    <input type="checkbox" id="allcheck">全选
                                 </th>
-                                <th class="sorting"  rowspan="1" colspan="1" style="">序号</th>
-                                <th class="sorting"rowspan="1" colspan="1" style="">编码</th>
-                                <th class="sorting"rowspan="1" colspan="1" style="">业态分类</th>
-                                <th class="sorting"rowspan="1" colspan="1" style="">名称</th>
-                                <th class="sorting"rowspan="1" colspan="1" style="">备注</th>
                             </thead>
 
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -81,7 +77,7 @@
                                 <td class="center ">2012/01/21</td>
                                 <td class="center ">Staff</td>
                                 <td class="center ">
-                                    <span class="label label-success">Active</span>
+                                    Active</span>
                                 </td>
                                 <td class="center ">
                                     <a class="btn btn-success" href="#">
@@ -146,47 +142,17 @@
 <div  id="NewInstance" style="width:100%;height:100%;position:fixed;left:0;top:0;background-color: rgba(0,0,0,0.4);display:none;">
     <div class="row-fluid" style="width:550px;margin:100px auto;">
         <div class="box span12">
-            <h3 style="background-color: white;margin:0;font-size: 20px;padding: 10px;padding-top: 40px;">新增产品类型信息</h3>
+            <h3 style="background-color: white;margin:0;font-size: 20px;padding: 10px;padding-top: 40px;" id="titleInstance">产品类型信息</h3>
             <div class="box-content">
                 <div id="errmsg" style="color:red;margin-left:180px;"></div>
                 <form class="form-horizontal" id="form">
                     <fieldset>
-                        <div class="control-group">
-                            <label class="control-label"><span style="color:red">*</span>编码</label>
-                            <div class="controls">
-                                <input type="text" id="code" name="code" needcheck="true" checkname="编码">
-                            </div>
-                        </div>
 
-                        <div class="control-group">
-                            <label class="control-label" for="selectError3"><span style="color:red">*</span>业态类型</label>
-                            <div class="controls">
-                                <select id="selectError3" name="select">
-                                    <option value="1">房源</option>
-                                    <option value="2">场地</option>
-                                    <option value="3">广告位</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label"><span style="color:red">*</span>名称</label>
-                            <div class="controls">
-                                <input type="text" id="name" name="name" needcheck="true" checkname="名称">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">备注</label>
-                            <div class="controls">
-                                <input type="text" id="remark" name="remark">
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <input type="button" id="submit" class="btn btn-primary" value="提交"/>
-                            <button class="btn">取消</button>
-                        </div>
                     </fieldset>
+                    <div class="form-actions">
+                        <input type="button" id="submit" class="btn btn-primary" value="提交"/>
+                        <button class="btn" id="cancleBtn">取消</button>
+                    </div>
                 </form>
 
             </div>
@@ -195,35 +161,161 @@
     </div>
 </div>
 <script>
-    $(function(){
-//        $("input").focus(function(){
-//            $("#errmsg").html();
-//        })
+    var thList=[{
+        itemName:"序号",
+        name:"id",
+        needcheck:"false",
+        inputType:"hidden"
+    },{
+        itemName:"编码",
+        name:"code",
+        needcheck:"true",
+        inputType:"text"
+    },{
+        itemName:"业态类型",
+        name:"select",
+        needcheck:"false",
+        select:true,
+        selectlist:[{name:"房源",val:'房源'},{name:"场地",val:"场地"},{name:"办公地",val:"办公地"}],
+    },{
+        itemName:"名称",
+        name:"name",
+        needcheck:"true",
+        inputType:"text"
+    },{
+        itemName:"备注",
+        name:"remark",
+        needcheck:"false",
+        inputType:"text"
+    }]
 
-        $('#submit').click(function() {
-            $("#errmsg").html();
-            var flag =true;
-            var error;
-            $("form input").each(function(){
-                if(flag){
-                    var needcheck=$(this).attr("needcheck");
-                    if(needcheck=="true"){
-                        var val=$(this).val();
-                        if(!!!val){
-                            error=$(this).attr("checkname")+"不能为空";
-                            flag=false;
-                        }
-                    }
+    var data=[{
+        id:1,
+        code:'001',
+        name:'dsada',
+        remark:'123',
+        select:'房源'
+    },{
+        id:1,
+        code:'001',
+        name:'dsada',
+        remark:'123',
+        select:'房源'
+    }];
+
+    $(function(){
+        //生成th
+        for(var i in thList){
+            $("thead tr").append("<th class='sorting' rowspan='1' colspan='1'>"+thList[i].itemName+"</th>")
+
+            var item=thList[i];
+            var field;
+            var span='';
+            if(item.needcheck=="true"){
+                span='<span style="color:red">*</span>';
+            }
+            if(item.select){
+                var options;
+                for(var j in item.selectlist){
+                    var item1=item.selectlist[j];
+                    options='<option value="'+item1.val+'">'+item1.name+'</option>';
                 }
-            })
-            if(!flag){
-                $("#errmsg").html(error);
-                return;
+
+                field='<div class="control-group">' +
+                    '<label class="control-label" for="selectError3">' +
+                    span +item.itemName+'</label> <div class="controls">' +
+                    ' <select id="selectError3" name="select">' +
+                    options+'</select> </div> </div>';
+            }else{
+                var dsp="";
+                if(item.inputType=="hidden"){
+                    dsp="none"
+                }
+                 field='<div class="control-group" style="display:'+dsp+'">' +
+                    '<label class="control-label">' +
+                     span +item.itemName+'</label> ' +
+                    '<div class="controls"> ' +
+                    '<input type="'+item.inputType+'" name="'+item.name+'" needcheck="'+item.needcheck+'" checkname="'+item.itemName+'"> ' +
+                    '</div></div>'
             }
 
-            var data=$("form").serialize();
-        });
+            $("#NewInstance fieldset").append(field);
+            $("#titleInstance").html($("title").html()+"信息");
+            $("#titleContent").html($("title").html());
+
+            $("#cancleBtn").click(function(){
+                $("#NewInstance").hide();
+            })
+
+            $("#allcheck").click(function(){
+                var a=$(this).prop("checked");
+                if(a){
+                    $("tbody [type=checkbox]").prop("checked","checked");
+                }else{
+                    $("tbody [type=checkbox]").removeProp("checked");
+                }
+            })
+
+            $('#submit').click(function() {
+                $("#errmsg").html();
+                var flag =true;
+                var error;
+                $("form input").each(function(){
+                    if(flag){
+                        var needcheck=$(this).attr("needcheck");
+                        if(needcheck=="true"){
+                            var val=$(this).val();
+                            if(!!!val){
+                                error=$(this).attr("checkname")+"不能为空";
+                                flag=false;
+                            }
+                        }
+                    }
+                })
+                if(!flag){
+                    $("#errmsg").html(error);
+                    return;
+                }
+                var data=$("form").serializeJSON()
+            });
+        }
     })
+
+    function FillData(){
+        var flag=false;
+        var tr="";
+        if(flag){
+            tr='<tr class="odd">';
+            flag=true;
+        }else{
+            tr='<tr class="">';
+        }
+
+        for(var i in data){
+            var item=data[i];
+
+            for(var j in item){
+                var key=item[j];
+                var th=thList.filter(function(e){
+                    return e.name==key;
+                });
+
+            }
+        }
+
+    }
+
+    function Delete(){
+        var eles=$("tbody [type=checkbox]:checked");
+        if(eles.length<=0){
+            alert("请先勾选");
+            return;
+        }
+        eles.each(function(){
+            $(this).parents("tr").remove();
+        })
+    }
+
 
 </script>
 </body>
