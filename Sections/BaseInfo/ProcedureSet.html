@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>产品类型</title>
+    <title>楼栋信息</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
         <div id="content" class="span10" style="min-height: 875px;width:100%;">
             <div class="row-fluid">
                 <div class="box span12">
-                    <h3 style="font-size: 25px;padding-bottom: 10px" id="titleContent">产品类型</h3>
+                    <h3 style="font-size: 25px;padding-bottom: 10px" id="titleContent">楼栋信息</h3>
                     <div></div>
                     <div class="box-content">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
@@ -59,10 +59,28 @@
                                 <th class="sorting"  rowspan="1" colspan="1" style="width: 60px;">
                                     <input type="checkbox" id="allcheck">全选
                                 </th>
+                                <th class="sorting"rowspan="1" colspan="1" style="width: 161px;">编码</th>
+                                <th class="sorting"rowspan="1" colspan="1" style="width: 161px;">名称</th>
+                                <th class="sorting"rowspan="1" colspan="1" style="width: 161px;">单元数量</th>
+                                <th class="sorting"rowspan="1" colspan="1" style="width: 161px;">层数</th>
                             </thead>
 
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+                                <script type="text/template" id="DataTpl">
+                                    {@each records as item,index}
+                                    {@if index/2==1}
+                                    <tr>
+                                     {@else}
+                                    <tr class="odd">
+                                    {@/if}
+                                        <td class=" sorting_1">
+                                            <input type="checkbox">
+                                        </td>
+                                        <td class="center">Adam Alister</td>
+                                        <td class="center ">2012/01/21</td>
+                                        <td class="center ">Staff</td>
+                                    </tr>
+                                </script>
                             </tbody>
                             </table>
 
@@ -83,7 +101,7 @@
 <div  id="NewInstance" style="width:100%;height:100%;position:fixed;left:0;top:0;background-color: rgba(0,0,0,0.4);display:none;z-index: 100">
     <div class="row-fluid" style="width:550px;margin:100px auto;">
         <div class="box span12">
-            <h3 style="background-color: white;margin:0;font-size: 20px;padding: 10px;padding-top: 40px;" id="titleInstance">产品类型信息</h3>
+            <h3 style="background-color: white;margin:0;font-size: 20px;padding: 10px;padding-top: 40px;" id="titleInstance">楼栋信息</h3>
             <div class="box-content">
                 <div id="errmsg" style="color:red;margin-left:180px;"></div>
                 <form class="form-horizontal" id="form">
@@ -102,61 +120,7 @@
 </div>
 
 <script>
-    var thList=[{
-        key:0,
-        itemName:"序号",
-        name:"id",
-        onclick:'Edit',
-        needcheck:"false",
-        inputType:"hidden"
-    },{
-        key:1,
-        itemName:"编码",
-        name:"code",
-        needcheck:"true",
-        inputType:"text"
-    },{
-        key:2,
-        itemName:"业态类型",
-        name:"select",
-        needcheck:"false",
-        select:true,
-        selectlist:[{name:"房源",val:'房源'},{name:"场地",val:"场地"},{name:"办公地",val:"办公地"}],
-    },{
-        key:3,
-        itemName:"名称",
-        name:"name",
-        needcheck:"true",
-        inputType:"text"
-    },{
-        key:4,
-        itemName:"备注",
-        name:"remark",
-        needcheck:"false",
-        inputType:"text"
-    },{
-        key:5,
-        itemName:"多余",
-        name:"add",
-        needcheck:"false",
-        inputType:"text"
-        }]
 
-    var data=[{
-        id:1,
-        code:'001',
-        name:'dsada',
-        remark:'123',
-        select:'房源',
-        add:"123"
-    },{
-        add:"123",
-        id:1,
-        code:'001',
-        name:'dsada',
-        remark:'123',
-        select:'房源',
-    }];
 
     function Delete(){
         var eles=$("tbody [type=checkbox]:checked");
@@ -192,17 +156,6 @@
         var data=$("form").serializeJSON()
     }
     var token="";
-
-    function GetQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
-        var context = "";
-        if (r != null)
-            context = r[2];
-        reg = null;
-        r = null;
-        return context == null || context == "" || context == "undefined" ? "" : context;
-    }
 
     $(function(){
         token=GetQueryString("token");

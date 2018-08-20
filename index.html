@@ -147,7 +147,7 @@ margin-top: 10px
 			<ul>
 				<li><a onclick="Jump('Sections/BaseInfo/ProductType.html')"><span>产品类型</span></a></li>
 				<li><a onclick="Jump('Sections/BaseInfo/ProjectTeam.html')"><span>项目组团</span></a></li>
-				<li><a href="javascript:;"><span>楼栋资料</span></a></li>
+				<li><a onclick="Jump('Sections/BaseInfo/BuildingInfo.html')"><span>楼栋资料</span></a></li>
 				<li><a href="javascript:;"><span>流程设置</span></a></li>
 			</ul>
 		</li>
@@ -224,7 +224,7 @@ margin-top: 10px
 	</ul>
 </div>
 	<div id="main" style="margin-left: 60px;">
-		<div class="setting-wrap" style="padding-top:90px;min-width: 1200px;display: none">
+		<div id="Daohang" class="setting-wrap" style="padding-top:90px;min-width: 1200px;">
 			<div>
 				<div class="my-title" style="">常用功能</div>
 				<div id="commonSettingDiv" class="setting-inner clearfix" style="background-color: white;padding: 40px 0;margin-right: 0px;padding-bottom: 0;text-align: center">
@@ -297,28 +297,35 @@ margin-top: 10px
 				</div>
 			</div>
 		</div>
-		<iframe style="width:100%;min-width:1200px;height:100%;min-height:1000px;background-color: white;padding-top:58px;min-width: 1200px;" id="MainFrame" src="Sections/BaseInfo/ProductType.html"></iframe>
+		<iframe style="display:none;width:100%;min-width:1200px;height:100%;min-height:1000px;background-color: white;padding-top:58px;min-width: 1200px;" id="MainFrame" src=""></iframe>
 	</div>
 </div>
 <script>
-	function Jump(src){
-	    $("#MainFrame").attr("src",src);
+    var token="";
+    function Jump(src){
+		$("#Daohang").hide();
+		$("#MainFrame").show();
+	    $("#MainFrame").attr("src",src+"?token="+token);
 	}
 
 	$(function(){
-		var token=GetQueryString("token");
-//		if(token!="123"){
-//		    location.href="login.html";
-//		    return;
-//		}
+		token=GetQueryString("token");
+		if(token==""){
+		    location.href="login.html";
+		    return;
+		}
 	})
 
 
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+        var context = "";
+        if (r != null)
+            context = r[2];
+        reg = null;
+        r = null;
+        return context == null || context == "" || context == "undefined" ? "" : context;
     }
 </script>
 </body>
